@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="index.css" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="./js/xlsx.full.min.js"></script>
+    <script src="./js/FileSaver.min.js"></script>
+    <script src="./js/tableexport.min.js"></script>
+    <!-- <script type="text/javascript" src="index.js"></script> -->
+    <script type="text/javascript">
+        const urlBasica = `http://cuartointento.eba-pszx6he4.sa-east-1.elasticbeanstalk.com/api/`;
+        var dataJson;
+        var dataStr='';
+        var dataHTML;
+     
+        function submit() {
+            debugger
+            const a = $("#a").val()
+            const b = $("#b").val()
+            const c = $("#c").val()
+            const n = $("#n").val()
+            const T = parseInt($("#T").val())
+            const D = parseInt($("#D").val())
+            const I = parseInt($("#I").val())
+
+            const urlIDF = `${urlBasica}IDF/${a}/${b}/${c}/${n}/${T}/${D}/${I}`
+            
+
+            fetch(urlIDF)
+                .then(function (response) {
+                  return response.json()
+                })
+                .then((data)=>GeneraTabla(data))
+                .catch(err => console.log(err)) 
+                
+               
+        }
+
+        function GeneraTabla (data){
+            debugger
+            let dimArray = data.ejeX.length;
+            for(let i =0; i< dimArray; i++){
+                dataStr+=  `<tr class="tabla-columna"><tdclass="tabla-celda">${data.ejeX[i]}</td><td class="tabla-celda">${data.ejeY[i]}</td></tr>`
+            }
+            dataHTML = `<table class="tabla">${dataStr}</table>`;
+            insertarHTML()
+        }
+
+        function insertarHTML(){
+            document.getElementById('resultados').innerHTML = dataHTML;
+            console.log(divResultados)
+        }
+
+       
+
+    </script>
+    <title>Tormeta de diseño</title>
+</head>
+
+<body>
+    <h1>Tormenta de diseño</h1>
+    <form>
+        <div class="form-container">
+            <span class="form-descripcion">a</span>
+            <input id="a" name="a" type="number">
+
+            
+            <span class="form-descripcion">b</span>
+            <input id="b" name="b" type="number">
+
+            <span class="form-descripcion">c</span>
+            <input id="c" name="c" type="number">
+
+            <span class="form-descripcion">n</span>
+            <input id="n" name="n" type="number">
+
+            <span class="form-descripcion">Tiempo de recurrencia (años)</span>
+            <input id="T" name="T" type="number">
+
+            <span class="form-descripcion">Duracion de tormenta (minutos)</span>
+            <input id="D" name="D" type="number">
+
+            <span class="form-descripcion">Cantidad de intervalos</span>
+            <input id="I" name="I" type="number">
+        </div>
+
+    </form>
+
+    <button id="btn_submit" onclick="submit(this)">Enviar</button>
+
+
+
+    <div id="resultados"></div>
+
+</body>
+
+</html>
