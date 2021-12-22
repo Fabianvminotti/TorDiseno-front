@@ -2,8 +2,8 @@
 
 
 .form-container{
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     min-width: 400px;
     max-width: 800px;
 }
@@ -13,3 +13,66 @@
 } */
 
 
+SPAN{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    text-align: right;
+    display: inline-block;
+    width: 45%;
+    padding-right: 2%;
+    background-color: rgb(116, 116, 116);
+    color: rgb(68, 68, 68);
+    border-radius: 5px;
+    background-color: white;
+   
+    padding: 2px;
+    margin: 2px;
+}
+
+input{
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+    background: rgb(233, 233, 233);
+    margin: 2px;
+    color: inherit;
+  border-style: none;
+    padding: 2px;
+   
+    border-radius: 5px;
+    border-color: rgb(170, 170, 170);
+        width: 45%;
+}
+
+#submit{
+    width: 90%;
+    height: 50px;
+    border-color:navy;
+    background-color: white;
+    border-radius: 7px;
+    margin: 10px;
+
+}
+
+.tabla-fila{
+    min-width: 200px;
+    max-width: 600px;
+    border-color: red;
+    border-radius: 5px;
+}
+
+.tabla-col1{
+    width: 25%;
+    background-color: rgb(115, 215, 255);
+    border-radius: 5px;
+}
+.tabla-col2{
+    width: 75%;
+    background-color: rgb(21, 136, 182);
+    color: white;
+    border-radius: 5px;
+}
+
+.tabla-titulo{
+    background-color: rgb(72, 31, 255);
+    color: white;
+    border-radius: 5px;
+}

@@ -11,7 +11,8 @@ function Input(){
     var dataHTML;
  
     function submit() {
-        debugger
+        
+        
         const a = $("#a").val()
         const b = $("#b").val()
         const c = $("#c").val()
@@ -28,7 +29,7 @@ function Input(){
               return response.json()
             })
             .then((data)=>GeneraTabla(data))
-            .catch(err => console.log(err)) 
+            .catch(err => alert('Revise los datos ingresados')) 
             
            
     }
@@ -37,20 +38,29 @@ function Input(){
         debugger
         let dimArray = data.ejeX.length;
         for(let i =0; i< dimArray; i++){
-            dataStr+=  `<tr class="tabla-columna"><tdclass="tabla-celda">${data.ejeX[i]}</td><td class="tabla-celda">${data.ejeY[i]}</td></tr>`
+            dataStr+=  `<tr class="tabla-fila"><td class="tabla-col1">${data.ejeX[i].toFixed(0)}</td><td class="tabla-col2">${data.ejeY[i].toFixed(2)}</td></tr>`
         }
-        dataHTML = `<table class="tabla">${dataStr}</table>`;
+        dataHTML = `<table class="tabla"><tr class="tabla-titulo"><td>Tiempo (min) </td><td>Precipitación (mm) </td></tr>${dataStr}</table>`;
+        limpiarHTML()
         insertarHTML()
     }
 
+    function limpiarHTML(){
+        document.getElementById('resultados').innerHTML="";
+    }
     function insertarHTML(){
+        
         document.getElementById('resultados').innerHTML = dataHTML;
+        dataStr=""
+        dataHTML=""
     }
 
 
 
     return(
+        <div>
         <div className="form-container">
+            
             <span className="form-descripcion">a</span>
             <input className="form-input" id="a" name="a" type="number"/>
 
@@ -73,9 +83,12 @@ function Input(){
             <span className="form-descripcion">Cantidad de intervalos</span>
             <input className="form-input" id="I" name="I" type="number"/>
 
-            <button onClick={submit}>Calcular</button>
+            <button  id="submit" onClick={submit}>Calcular</button>
         </div>
-        
+  
+
+        <div id="resultados"></div>
+        </div>
     )
 }
 
